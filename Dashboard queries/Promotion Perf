@@ -1,0 +1,49 @@
+WITH coupon_analysis AS (
+    SELECT 
+        c.coupon_id,
+        c.coupon_title,
+        s.store_name,
+        c.discount_type,
+        c.value,
+        c.min_purchase,
+        COUNT(t.transaction_id) AS redemption_count,
+        COUNT(DISTINCT t.membership_id) AS unique_customers,
+        ROUND(COUNT(t.transaction_id) * c.value * 
+            CASE WHEN c.discount_type = 'Percentage' THEN 0.01 ELSE 1 END, 2) AS total_discount_value,
+        ROUND(COUNT(t.transaction_id) / NULLIF((
+            SELECT COUNT(DISTINCT m2.membership_id) 
+            FROM MEMBERSHIPS m2 
+            WHERE m2.store_id = s.store_id
+        ), 0) * 100, 2) AS redemption_rate
+    FROM COUPONS c
+    JOIN STORES s ON c.store_id = s.store_id
+    LEFT JOIN TRANSACTIONS t ON c.coupon_id = t.coupon_id
+    GROUP BY c.coupon_id, c.coupon_title, s.store_name, c.discount_type, c.value, c.min_purchase, s.store_id
+),
+reward_analysis AS (
+    SELECT 
+        r.reward_id,
+        r.reward_title,
+        s.store_name,
+        r.point_required,
+        COUNT(t.transaction_id) AS redemption_count,
+        COUNT(DISTINCT t.membership_id) AS unique_customers,
+        r.quantity - COUNT(t.transaction_id) AS remaining_quantity,
+        ROUND(COUNT(t.transaction_id) / NULLIF(r.quantity, 0) * 100, 2) AS redemption_percentage,
+        ROUND(COUNT(t.transaction_id) * r.point_required * 0.1, 2) AS estimated_value
+    FROM REWARDS r
+    JOIN STORES s ON r.store_id = s.store_id
+    LEFT JOIN TRANSACTIONS t ON r.reward_id = t.reward_id
+    GROUP BY r.reward_id, r.reward_title, s.store_name, r.point_required, r.quantity
+)
+SELECT 'COUPON' AS promotion_type, coupon_id AS id, coupon_title AS title, store_name,
+    redemption_count, unique_customers, total_discount_value, redemption_rate, NULL AS point_value
+FROM coupon_analysis
+WHERE redemption_count > 0
+UNION ALL
+SELECT 'REWARD' AS promotion_type, reward_id AS id, reward_title AS title, store_name,
+    redemption_count, unique_customers, estimated_value AS total_discount_value, 
+    redemption_percentage AS redemption_rate, point_required
+FROM reward_analysis
+WHERE redemption_count > 0
+ORDER BY promotion_type, redemption_count DESC;

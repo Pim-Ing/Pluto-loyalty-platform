@@ -1,0 +1,70 @@
+WITH customer_stats AS (
+    SELECT 
+        c.customer_id,
+        c.name,
+        c.gender,
+        EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM c.DOB) AS age,
+        COUNT(DISTINCT m.store_id) AS stores_joined,
+        COUNT(t.transaction_id) AS total_transactions,
+        SUM(CASE WHEN t.type = 'Earn' THEN t.point_delta ELSE 0 END) AS points_earned,
+        SUM(CASE WHEN t.type = 'Redeem' THEN ABS(t.point_delta) ELSE 0 END) AS points_redeemed,
+        ROUND(MONTHS_BETWEEN(SYSDATE, MAX(t.timestamp)), 1) AS months_since_last_activity
+    FROM CUSTOMERS c
+    LEFT JOIN MEMBERSHIPS m ON c.customer_id = m.customer_id
+    LEFT JOIN TRANSACTIONS t ON m.membership_id = t.membership_id
+    GROUP BY c.customer_id, c.name, c.gender, c.DOB
+),
+rfm_calculated AS (
+    SELECT 
+        customer_id,
+        months_since_last_activity,
+        total_transactions,
+        points_earned,
+        NTILE(5) OVER (ORDER BY months_since_last_activity DESC) AS recency,
+        NTILE(5) OVER (ORDER BY total_transactions) AS frequency,
+        NTILE(5) OVER (ORDER BY points_earned) AS monetary
+    FROM customer_stats
+),
+rfm_scores AS (
+    SELECT 
+        customer_id,
+        recency,
+        frequency,
+        monetary,
+        CASE
+            WHEN months_since_last_activity <= 3 AND points_earned > 500 THEN 'VIP'
+            WHEN recency >= 4 AND frequency >= 4 AND monetary >= 4 THEN 'Champion'
+            WHEN recency <= 2 AND frequency >= 3 THEN 'At Risk'
+            WHEN recency <= 2 THEN 'Dormant'
+            ELSE 'Regular'
+        END AS segment
+    FROM rfm_calculated
+)
+SELECT * FROM (
+    SELECT 
+        cs.customer_id,
+        cs.name,
+        cs.gender,
+        cs.age,
+        cs.stores_joined,
+        cs.total_transactions,
+        cs.points_earned,
+        cs.points_redeemed,
+        rs.recency,
+        rs.frequency,
+        rs.monetary,
+        rs.segment,
+        ROUND(cs.points_earned * 0.1 * cs.total_transactions / 
+            NULLIF(GREATEST(cs.months_since_last_activity, 1), 0), 2) AS estimated_value,
+        CASE
+            WHEN rs.segment = 'VIP' THEN 'Exclusive offers'
+            WHEN rs.segment = 'Champion' THEN 'Referral programs'
+            WHEN rs.segment = 'At Risk' THEN 'Re-engagement campaign'
+            WHEN rs.segment = 'Dormant' THEN 'Win-back offers'
+            ELSE 'Regular promotions'
+        END AS action_required
+    FROM customer_stats cs
+    JOIN rfm_scores rs ON cs.customer_id = rs.customer_id
+    WHERE cs.total_transactions > 0
+    ORDER BY cs.points_earned DESC
+) WHERE ROWNUM <= 20;
