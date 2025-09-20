@@ -1,0 +1,28 @@
+-- Create POINTS_BATCHES Table --
+CREATE TABLE POINTS_BATCHES (
+    batch_id NUMBER(10) CONSTRAINT points_batch_id_pk PRIMARY KEY,
+    membership_id NUMBER(16) CONSTRAINT points_mem_id_nn NOT NULL,
+    transaction_id NUMBER(10) CONSTRAINT points_trans_id_nn NOT NULL,
+    points_earned NUMBER(10) CONSTRAINT points_earned_nn NOT NULL
+        CONSTRAINT points_earned_ck CHECK (points_earned > 0),
+    points_remaining NUMBER(10) CONSTRAINT points_remain_nn NOT NULL
+        CONSTRAINT points_remain_ck CHECK (points_remaining >= 0),
+    earned_date DATE CONSTRAINT points_earned_dt_nn NOT NULL,
+    expiration_date DATE CONSTRAINT points_expire_dt_nn NOT NULL,
+    CONSTRAINT points_mem_fk FOREIGN KEY (membership_id) REFERENCES MEMBERSHIPS(membership_id),
+    CONSTRAINT points_trans_fk FOREIGN KEY (transaction_id) REFERENCES TRANSACTIONS(transaction_id)
+);
+
+-- Insert POINTS_BATCHES only for earning transactions (positive point_delta)--
+INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
+(points_batches_seq.NEXTVAL, 1000000000000000, 303, 50, 50, TIMESTAMP '2025-06-15 12:30:45', TIMESTAMP '2025-12-15 12:30:45');
+INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
+(points_batches_seq.NEXTVAL, 1000000000000001, 305, 30, 30, TIMESTAMP '2025-08-10 14:20:15', TIMESTAMP '2025-12-10 14:20:15');
+INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
+(points_batches_seq.NEXTVAL, 1000000000000004, 308, 25, 25, TIMESTAMP '2025-11-18 13:45:00', TIMESTAMP '2026-05-18 13:45:00');
+INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
+(points_batches_seq.NEXTVAL, 1000000000000005, 309, 15, 15, TIMESTAMP '2025-12-22 15:20:00', TIMESTAMP '2026-06-22 15:20:00');
+INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
+(points_batches_seq.NEXTVAL, 1000000000000008, 312, 35, 35, TIMESTAMP '2025-03-15 21:05:00', TIMESTAMP '2025-09-15 21:05:00');
+INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
+(points_batches_seq.NEXTVAL, 1000000000000009, 313, 20, 20, TIMESTAMP '2025-04-20 22:20:00', TIMESTAMP '2025-10-20 22:20:00');

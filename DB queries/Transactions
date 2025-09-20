@@ -1,0 +1,41 @@
+-- Create TRANSACTIONS Table--
+CREATE TABLE TRANSACTIONS (
+    transaction_id NUMBER(10) CONSTRAINT transactions_transaction_id_pk PRIMARY KEY,
+    store_id NUMBER(10) CONSTRAINT transactions_store_id_nn NOT NULL,
+    membership_id NUMBER(16) CONSTRAINT transactions_membership_id_nn NOT NULL,
+    reward_id NUMBER(10),
+    coupon_id NUMBER(10),
+    point_delta NUMBER(10) CONSTRAINT transactions_point_delta_nn NOT NULL
+        CONSTRAINT transactions_point_delta_ck CHECK (point_delta != 0),
+    type VARCHAR2(50) CONSTRAINT transactions_type_nn NOT NULL
+        CONSTRAINT transactions_type_ck CHECK (type IN ('Earn', 'Redeem')),
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP CONSTRAINT transactions_timestamp_nn NOT NULL,
+    CONSTRAINT transactions_store_id_fk FOREIGN KEY (store_id) REFERENCES STORES(store_id),
+    CONSTRAINT transactions_membership_id_fk FOREIGN KEY (membership_id) REFERENCES MEMBERSHIPS(membership_id),
+    CONSTRAINT transactions_reward_id_fk FOREIGN KEY (reward_id) REFERENCES REWARDS(reward_id),
+    CONSTRAINT transactions_coupon_id_fk FOREIGN KEY (coupon_id) REFERENCES COUPONS(coupon_id)
+);
+
+-- Insert TRANSACTIONS (10+ records)--
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2100, 1000000000000000, 54100, NULL, 50, 'Earn', TIMESTAMP '2024-06-15 12:30:45');
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, batch_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2100, 1000000000000000, NULL, 45100, -99, 'Redeem', TIMESTAMP '2024-07-20 18:15:30');
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, batch_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2101, 1000000000000001, NULL, 45103, 30, 'Earn', TIMESTAMP '2024-08-10 14:20:15');
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, batch_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2102, 1000000000000002, 54101, NULL, -9, 'Redeem', TIMESTAMP '2024-09-05 19:45:00');
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, batch_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2103, 1000000000000003, 54103, NULL, -399, 'Redeem', TIMESTAMP '2024-10-12 11:30:00');
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, batch_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2104, 1000000000000004, NULL, 45108, 25, 'Earn', TIMESTAMP '2024-11-18 13:45:00');
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, batch_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2105, 1000000000000005, NULL, NULL, 15, 'Earn', TIMESTAMP '2024-12-22 15:20:00');
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, batch_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2106, 1000000000000006, 54105, NULL, -50, 'Redeem', TIMESTAMP '2025-01-05 17:35:00');
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, batch_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2107, 1000000000000007, 54109, NULL, -40, 'Redeem', TIMESTAMP '2025-02-10 19:50:00');
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, batch_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2108, 1000000000000008, NULL, NULL, 35, 'Earn', TIMESTAMP '2025-03-15 21:05:00');
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, batch_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2109, 1000000000000009, NULL, NULL, 20, 'Earn', TIMESTAMP '2025-04-20 22:20:00');

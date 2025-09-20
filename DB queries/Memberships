@@ -1,0 +1,33 @@
+-- Create Membership Table--
+CREATE TABLE MEMBERSHIPS (
+    membership_id NUMBER(16) CONSTRAINT memberships_membership_id_pk PRIMARY KEY,
+    customer_id NUMBER(10) CONSTRAINT memberships_user_id_nn NOT NULL,
+    store_id NUMBER(10) CONSTRAINT memberships_store_id_nn NOT NULL,
+    join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP CONSTRAINT memberships_join_date_nn NOT NULL,
+    CONSTRAINT memberships_customer_id_fk FOREIGN KEY (customer_id) REFERENCES USERS(customer_id),
+    CONSTRAINT memberships_store_id_fk FOREIGN KEY (store_id) REFERENCES STORES(store_id)
+);
+
+-- Insert MEMBERSHIPS (10+ records)--
+INSERT INTO MEMBERSHIPS (membership_id, customer_id, store_id, join_date) VALUES
+(memberships_seq.NEXTVAL, 1, 2100, TIMESTAMP '2024-01-20 15:30:00');
+INSERT INTO MEMBERSHIPS (membership_id, customer_id, store_id, join_date) VALUES
+(memberships_seq.NEXTVAL, 1, 2101, TIMESTAMP '2024-02-05 11:20:00');
+INSERT INTO MEMBERSHIPS (membership_id, customer_id, store_id, join_date) VALUES
+(memberships_seq.NEXTVAL, 2, 2102, TIMESTAMP '2024-02-15 14:45:00');
+INSERT INTO MEMBERSHIPS (membership_id, customer_id, store_id, join_date) VALUES
+(memberships_seq.NEXTVAL, 2, 2103, TIMESTAMP '2024-03-01 16:10:00');
+INSERT INTO MEMBERSHIPS (membership_id, customer_id, store_id, join_date) VALUES
+(memberships_seq.NEXTVAL, 3, 2104, TIMESTAMP '2024-03-20 09:30:00');
+INSERT INTO MEMBERSHIPS (membership_id, customer_id, store_id, join_date) VALUES
+(memberships_seq.NEXTVAL, 3, 2105, TIMESTAMP '2024-04-10 12:40:00');
+INSERT INTO MEMBERSHIPS (membership_id, customer_id, store_id, join_date) VALUES
+(memberships_seq.NEXTVAL, 4, 2106, TIMESTAMP '2024-05-15 13:50:00');
+INSERT INTO MEMBERSHIPS (membership_id, customer_id, store_id, join_date) VALUES
+(memberships_seq.NEXTVAL, 4, 2107, TIMESTAMP '2024-06-20 14:15:00');
+INSERT INTO MEMBERSHIPS (membership_id, customer_id, store_id, join_date) VALUES
+(memberships_seq.NEXTVAL, 5, 2108, TIMESTAMP '2024-07-25 15:25:00');
+INSERT INTO MEMBERSHIPS (membership_id, customer_id, store_id, join_date) VALUES
+(memberships_seq.NEXTVAL, 5, 2109, TIMESTAMP '2024-08-30 16:35:00');
+INSERT INTO MEMBERSHIPS (membership_id, customer_id, store_id, join_date) VALUES
+(memberships_seq.NEXTVAL, 6, 2100, TIMESTAMP '2024-09-05 17:45:00');

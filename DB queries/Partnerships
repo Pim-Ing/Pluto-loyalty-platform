@@ -1,0 +1,21 @@
+-- Create PARTNERSHIPS Table--
+CREATE TABLE PARTNERSHIPS (
+    partnership_id NUMBER(10) CONSTRAINT partnerships_partnership_id_pk PRIMARY KEY,
+    partner_name VARCHAR2(100) CONSTRAINT partnerships_partner_name_nn NOT NULL,
+    contact_email VARCHAR2(100) CONSTRAINT partnerships_contact_email_nn NOT NULL
+        CONSTRAINT partnerships_contact_email_u UNIQUE,
+    partner_logo_url VARCHAR2(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP CONSTRAINT partnerships_created_at_nn NOT NULL
+);
+
+-- Insert PARTNERSHIPS (from sampling data)--
+INSERT INTO PARTNERSHIPS (partnership_id, partner_name, contact_email, partner_logo_url, created_at) VALUES
+(partnerships_seq.NEXTVAL, 'CRG. (Central Restaurant Group)', 'crg@partner.com', 'https://logo.com/crg.png', TIMESTAMP '2024-01-01 08:00:00');
+INSERT INTO PARTNERSHIPS (partnership_id, partner_name, contact_email, partner_logo_url, created_at) VALUES
+(partnerships_seq.NEXTVAL, 'McThai Co.', 'mcthai@partner.com', 'https://logo.com/mcthai.png', TIMESTAMP '2024-01-02 09:30:00');
+INSERT INTO PARTNERSHIPS (partnership_id, partner_name, contact_email, partner_logo_url, created_at) VALUES
+(partnerships_seq.NEXTVAL, 'The Minor Food Group PCL', 'minor@partner.com', 'https://logo.com/minor.png', TIMESTAMP '2024-01-03 10:45:00');
+INSERT INTO PARTNERSHIPS (partnership_id, partner_name, contact_email, partner_logo_url, created_at) VALUES
+(partnerships_seq.NEXTVAL, 'Thai Bev Plc.', 'thaibev@partner.com', 'https://logo.com/thaibev.png', TIMESTAMP '2024-01-04 11:15:00');
+INSERT INTO PARTNERSHIPS (partnership_id, partner_name, contact_email, partner_logo_url, created_at) VALUES
+(partnerships_seq.NEXTVAL, 'ROCKS PC COMPANY LIMITED', 'rocks@partner.com', 'https://logo.com/rocks.png', TIMESTAMP '2024-01-05 12:30:00');

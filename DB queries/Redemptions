@@ -1,0 +1,37 @@
+-- Create STORE_CODE_REDEMPTIONS Table--
+CREATE TABLE STORE_CODE_REDEMPTIONS (
+    redemption_id NUMBER(10) CONSTRAINT redempt_red_id_pk PRIMARY KEY,
+    code_id NUMBER(10) CONSTRAINT redempt_code_id_nn NOT NULL,
+    customer_id NUMBER(10) CONSTRAINT redempt_customer_id_nn NOT NULL,
+    redeemed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP CONSTRAINT redempt_time_nn NOT NULL,
+    status VARCHAR2(10) CONSTRAINT redempt_status_nn NOT NULL
+        CONSTRAINT redempt_status_ck CHECK (status IN ('Success', 'Failed', 'Limit')),
+    CONSTRAINT redempt_code_fk FOREIGN KEY (code_id) REFERENCES STORE_SCAN_CODES(code_id),
+    CONSTRAINT redempt_user_fk FOREIGN KEY (customer_id) REFERENCES USERS(customer_id)
+);
+
+-- Insert STORE_CODE_REDEMPTIONS with status values within 10-character limit
+INSERT INTO STORE_CODE_REDEMPTIONS (redemption_id, code_id, user_id, redeemed_at, status) VALUES
+(redemptions_seq.NEXTVAL, 333333, 1, TIMESTAMP '2025-06-15 12:32:00', 'Success');
+INSERT INTO STORE_CODE_REDEMPTIONS (redemption_id, code_id, user_id, redeemed_at, status) VALUES
+(redemptions_seq.NEXTVAL, 333334, 1, TIMESTAMP '2025-07-20 18:16:00', 'Success');
+INSERT INTO STORE_CODE_REDEMPTIONS (redemption_id, code_id, user_id, redeemed_at, status) VALUES
+(redemptions_seq.NEXTVAL, 333335, 2, TIMESTAMP '2025-08-10 14:22:00', 'Success');
+INSERT INTO STORE_CODE_REDEMPTIONS (redemption_id, code_id, user_id, redeemed_at, status) VALUES
+(redemptions_seq.NEXTVAL, 333336, 2, TIMESTAMP '2025-09-05 19:47:00', 'Success');
+INSERT INTO STORE_CODE_REDEMPTIONS (redemption_id, code_id, user_id, redeemed_at, status) VALUES
+(redemptions_seq.NEXTVAL, 333337, 3, TIMESTAMP '2025-10-12 11:32:00', 'Success');
+INSERT INTO STORE_CODE_REDEMPTIONS (redemption_id, code_id, user_id, redeemed_at, status) VALUES
+(redemptions_seq.NEXTVAL, 333338, 4, TIMESTAMP '2025-11-18 13:47:00', 'Success');
+INSERT INTO STORE_CODE_REDEMPTIONS (redemption_id, code_id, user_id, redeemed_at, status) VALUES
+(redemptions_seq.NEXTVAL, 333339, 5, TIMESTAMP '2025-12-22 15:22:00', 'Success');
+INSERT INTO STORE_CODE_REDEMPTIONS (redemption_id, code_id, user_id, redeemed_at, status) VALUES
+(redemptions_seq.NEXTVAL, 333340, 6, TIMESTAMP '2025-01-05 17:37:00', 'Success');
+INSERT INTO STORE_CODE_REDEMPTIONS (redemption_id, code_id, user_id, redeemed_at, status) VALUES
+(redemptions_seq.NEXTVAL, 333341, 7, TIMESTAMP '2025-02-10 19:52:00', 'Success');
+INSERT INTO STORE_CODE_REDEMPTIONS (redemption_id, code_id, user_id, redeemed_at, status) VALUES
+(redemptions_seq.NEXTVAL, 333342, 8, TIMESTAMP '2025-03-15 21:07:00', 'Success');
+INSERT INTO STORE_CODE_REDEMPTIONS (redemption_id, code_id, user_id, redeemed_at, status) VALUES
+(redemptions_seq.NEXTVAL, 333333, 9, TIMESTAMP '2025-04-20 22:22:00', 'Limit');
+INSERT INTO STORE_CODE_REDEMPTIONS (redemption_id, code_id, user_id, redeemed_at, status) VALUES
+(redemptions_seq.NEXTVAL, 333335, 10, TIMESTAMP '2025-05-25 10:15:00', 'Failed');

@@ -1,0 +1,37 @@
+-- Create REWARDS Table--
+CREATE TABLE REWARDS (
+    reward_id NUMBER(10) CONSTRAINT rewards_reward_id_pk PRIMARY KEY,
+    store_id NUMBER(10) CONSTRAINT rewards_store_id_nn NOT NULL,
+    reward_title VARCHAR2(100) CONSTRAINT rewards_reward_title_nn NOT NULL,
+    reward_description VARCHAR2(255),
+    point_required NUMBER(10) CONSTRAINT rewards_point_required_nn NOT NULL
+        CONSTRAINT rewards_point_required_ck CHECK (point_required > 0),
+    reward_start_date DATE CONSTRAINT rewards_reward_start_date_nn NOT NULL,
+    reward_end_date DATE CONSTRAINT rewards_reward_end_date_nn NOT NULL,
+    quantity NUMBER(10) CONSTRAINT rewards_quantity_nn NOT NULL
+        CONSTRAINT rewards_quantity_ck CHECK (quantity >= 0),
+    reward_image_url VARCHAR2(255),
+    CONSTRAINT rewards_store_id_fk FOREIGN KEY (store_id) REFERENCES STORES(store_id)
+);
+
+-- Insert REWARDS (from sampling data)--
+INSERT INTO REWARDS (reward_id, store_id, reward_title, reward_description, point_required, reward_start_date, reward_end_date, quantity, reward_image_url) VALUES
+(rewards_seq.NEXTVAL, 2100, 'True Customers Discount 20 Baht', 'Discount of 20 Baht for True customers', 99, DATE '2024-01-01', DATE '2025-12-31', 1000, 'https://reward.com/true_discount.png');
+INSERT INTO REWARDS (reward_id, store_id, reward_title, reward_description, point_required, reward_start_date, reward_end_date, quantity, reward_image_url) VALUES
+(rewards_seq.NEXTVAL, 2102, 'Gyoza Special Offer', 'Redeem 9 points + 99 THB to get Gyoza (5 pcs.)', 9, DATE '2024-01-01', DATE '2026-01-31', 500, 'https://reward.com/gyoza.png');
+INSERT INTO REWARDS (reward_id, store_id, reward_title, reward_description, point_required, reward_start_date, reward_end_date, quantity, reward_image_url) VALUES
+(rewards_seq.NEXTVAL, 2102, 'Bon Chon 4 Wings Special', 'Redeem to get Bon Chon 4 wings for 119 THB', 9, DATE '2024-01-01', DATE '2025-12-31', 300, 'https://reward.com/wings.png');
+INSERT INTO REWARDS (reward_id, store_id, reward_title, reward_description, point_required, reward_start_date, reward_end_date, quantity, reward_image_url) VALUES
+(rewards_seq.NEXTVAL, 2103, 'Swensens Buy 1 Get 1 Free', 'Buy 1, Redeem 1 at Swensen''s', 399, DATE '2024-01-01', DATE '2025-09-30', 200, 'https://reward.com/swensens_bogo.png');
+INSERT INTO REWARDS (reward_id, store_id, reward_title, reward_description, point_required, reward_start_date, reward_end_date, quantity, reward_image_url) VALUES
+(rewards_seq.NEXTVAL, 2103, 'Happy Thursday Promotion', 'Buy 1 Get 1 Free for only 179 THB', 60, DATE '2024-01-01', DATE '2026-01-31', 150, 'https://reward.com/happy_thursday.png');
+INSERT INTO REWARDS (reward_id, store_id, reward_title, reward_description, point_required, reward_start_date, reward_end_date, quantity, reward_image_url) VALUES
+(rewards_seq.NEXTVAL, 2106, '25 Baht Discount Coupon', 'Discount 25 Baht on next purchase', 50, DATE '2024-01-01', DATE '2025-09-30', 400, 'https://reward.com/25_discount.png');
+INSERT INTO REWARDS (reward_id, store_id, reward_title, reward_description, point_required, reward_start_date, reward_end_date, quantity, reward_image_url) VALUES
+(rewards_seq.NEXTVAL, 2106, 'Chicken Wings 6 pcs', 'Redeem Chicken Wing 6 pcs.', 200, DATE '2024-01-01', DATE '2025-09-30', 100, 'https://reward.com/chicken_wings.png');
+INSERT INTO REWARDS (reward_id, store_id, reward_title, reward_description, point_required, reward_start_date, reward_end_date, quantity, reward_image_url) VALUES
+(rewards_seq.NEXTVAL, 2106, 'Spaghetti Dish', 'Redeem a spaghetti 1 dish', 150, DATE '2024-01-01', DATE '2025-09-30', 80, 'https://reward.com/spaghetti.png');
+INSERT INTO REWARDS (reward_id, store_id, reward_title, reward_description, point_required, reward_start_date, reward_end_date, quantity, reward_image_url) VALUES
+(rewards_seq.NEXTVAL, 2106, 'Free Appetizer', 'Redeem 1 Appetizer', 100, DATE '2024-01-01', DATE '2025-09-30', 120, 'https://reward.com/appetizer.png');
+INSERT INTO REWARDS (reward_id, store_id, reward_title, reward_description, point_required, reward_start_date, reward_end_date, quantity, reward_image_url) VALUES
+(rewards_seq.NEXTVAL, 2107, 'Free Ice Cream Cone', 'Redeem 40 Point to get Free 1 Ice cream cone', 40, DATE '2024-01-01', DATE '2025-12-31', 300, 'https://reward.com/ice_cream.png');

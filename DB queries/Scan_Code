@@ -1,0 +1,35 @@
+-- Create STORE_SCAN_CODE Table--
+CREATE TABLE STORE_SCAN_CODES (
+    code_id NUMBER(10) CONSTRAINT scan_codes_code_id_pk PRIMARY KEY,
+    store_id NUMBER(10) CONSTRAINT scan_codes_store_id_nn NOT NULL,
+    code_type VARCHAR2(10) CONSTRAINT scan_codes_type_nn NOT NULL
+        CONSTRAINT scan_codes_type_ck CHECK (code_type IN ('QR', 'Barcode')),
+    code_data VARCHAR2(50) CONSTRAINT scan_codes_data_nn NOT NULL,
+    action_type VARCHAR2(20) CONSTRAINT scan_codes_action_nn NOT NULL
+        CONSTRAINT scan_codes_action_ck CHECK (action_type IN ('Earn points', 'Used points', 'Claim coupon', 'Claim reward')),
+    action_value VARCHAR2(50) CONSTRAINT scan_codes_value_nn NOT NULL,
+    per_user_limit NUMBER(10),
+    CONSTRAINT scan_codes_store_fk FOREIGN KEY (store_id) REFERENCES STORES(store_id)
+);
+
+-- Insert STORE_SCAN_CODES (10+ records)
+INSERT INTO STORE_SCAN_CODES (code_id, store_id, code_type, code_data, action_type, action_value, per_user_limit) VALUES
+(scan_codes_seq.NEXTVAL, 2100, 'QR', 'KFC_EARN_001', 'Earn points', '10', 5);
+INSERT INTO STORE_SCAN_CODES (code_id, store_id, code_type, code_data, action_type, action_value, per_user_limit) VALUES
+(scan_codes_seq.NEXTVAL, 2100, 'Barcode', 'KFC_REDEEM_001', 'Used points', 'DISCOUNT20', 1);
+INSERT INTO STORE_SCAN_CODES (code_id, store_id, code_type, code_data, action_type, action_value, per_user_limit) VALUES
+(scan_codes_seq.NEXTVAL, 2101, 'QR', 'MAC_EARN_001', 'Earn points', '5', 10);
+INSERT INTO STORE_SCAN_CODES (code_id, store_id, code_type, code_data, action_type, action_value, per_user_limit) VALUES
+(scan_codes_seq.NEXTVAL, 2102, 'QR', 'BONCHON_EARN_001', 'Earn points', '8', 7);
+INSERT INTO STORE_SCAN_CODES (code_id, store_id, code_type, code_data, action_type, action_value, per_user_limit) VALUES
+(scan_codes_seq.NEXTVAL, 2103, 'Barcode', 'SWENSENS_REDEEM_001', 'Claim reward', 'BOGO399', 2);
+INSERT INTO STORE_SCAN_CODES (code_id, store_id, code_type, code_data, action_type, action_value, per_user_limit) VALUES
+(scan_codes_seq.NEXTVAL, 2104, 'QR', 'PIZZAHUT_EARN_001', 'Earn points', '12', 6);
+INSERT INTO STORE_SCAN_CODES (code_id, store_id, code_type, code_data, action_type, action_value, per_user_limit) VALUES
+(scan_codes_seq.NEXTVAL, 2105, 'Barcode', 'POTATO_REDEEM_001', 'Claim coupon', 'UPGRADE15', 3);
+INSERT INTO STORE_SCAN_CODES (code_id, store_id, code_type, code_data, action_type, action_value, per_user_limit) VALUES
+(scan_codes_seq.NEXTVAL, 2106, 'QR', 'PIZZADEL_EARN_001', 'Earn points', '7', 8);
+INSERT INTO STORE_SCAN_CODES (code_id, store_id, code_type, code_data, action_type, action_value, per_user_limit) VALUES
+(scan_codes_seq.NEXTVAL, 2107, 'Barcode', 'DAIRYQ_REDEEM_001', 'Claim reward', 'ICECREAM40', 4);
+INSERT INTO STORE_SCAN_CODES (code_id, store_id, code_type, code_data, action_type, action_value, per_user_limit) VALUES
+(scan_codes_seq.NEXTVAL, 2108, 'QR', 'SIZZLER_EARN_001', 'Earn points', '15',3);

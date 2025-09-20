@@ -1,0 +1,37 @@
+-- Create CUSTOMERS Table--
+CREATE TABLE CUSTOMERS (
+    customer_id NUMBER(10) CONSTRAINT customers_customer_id_pk PRIMARY KEY,
+    name VARCHAR2(100) CONSTRAINT customers_name_nn NOT NULL,
+    DOB DATE CONSTRAINT customers_dob_nn NOT NULL,
+    gender VARCHAR2(10) CONSTRAINT customers_gender_nn NOT NULL
+        CONSTRAINT customers_gender_ck CHECK (gender IN ('Male', 'Female', 'Other')),
+    phone VARCHAR2(20) CONSTRAINT users_phone_nn NOT NULL
+        CONSTRAINT customers_phone_u UNIQUE,
+    email VARCHAR2(100) CONSTRAINT customers_email_nn NOT NULL
+        CONSTRAINT customers_email_u UNIQUE,
+    hashed_password VARCHAR2(255) CONSTRAINT customers_hashed_password_nn NOT NULL
+        CONSTRAINT customers_hashed_password_u UNIQUE,
+    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP CONSTRAINT customers_create_at_nn NOT NULL
+);
+
+-- Insert CUSTOMERS with Thai-style English names--
+INSERT INTO USERS (customer_id, name, DOB, gender, phone, email, hashed_password, create_at) VALUES
+(users_seq.NEXTVAL, 'Somchai Jaidee', TO_DATE('1990-05-15', 'YYYY-MM-DD'), 'Male', '0812345678', 'somchai.jaidee@email.com', 'hashed_pass_1', TIMESTAMP '2024-01-15 09:30:45');
+INSERT INTO USERS (customer_id, name, DOB, gender, phone, email, hashed_password, create_at) VALUES
+(users_seq.NEXTVAL, 'Sunisa Wattana', TO_DATE('1985-08-22', 'YYYY-MM-DD'), 'Female', '0823456789', 'sunisa.wattana@email.com', 'hashed_pass_2', TIMESTAMP '2024-02-20 14:25:30');
+INSERT INTO USERS (customer_id, name, DOB, gender, phone, email, hashed_password, create_at) VALUES
+(users_seq.NEXTVAL, 'Prayut Chan-o-cha', TO_DATE('1978-12-10', 'YYYY-MM-DD'), 'Male', '0834567890', 'prayut.chanocha@email.com', 'hashed_pass_3', TIMESTAMP '2024-03-10 10:15:20');
+INSERT INTO USERS (customer_id, name, DOB, gender, phone, email, hashed_password, create_at) VALUES
+(users_seq.NEXTVAL, 'Yingluck Shinawatra', TO_DATE('1967-06-21', 'YYYY-MM-DD'), 'Female', '0845678901', 'yingluck.shinawatra@email.com', 'hashed_pass_4', TIMESTAMP '2024-04-05 16:40:10');
+INSERT INTO USERS (customer_id, name, DOB, gender, phone, email, hashed_password, create_at) VALUES
+(users_seq.NEXTVAL, 'Thanathorn Juangroongruangkit', TO_DATE('1978-11-25', 'YYYY-MM-DD'), 'Male', '0856789012', 'thanathorn.j@email.com', 'hashed_pass_5', TIMESTAMP '2024-05-12 08:20:35');
+INSERT INTO USERS (customer_id, name, DOB, gender, phone, email, hashed_password, create_at) VALUES
+(users_seq.NEXTVAL, 'Pita Limjaroenrat', TO_DATE('1980-09-05', 'YYYY-MM-DD'), 'Male', '0867890123', 'pita.limjaroenrat@email.com', 'hashed_pass_6', TIMESTAMP '2024-06-18 11:45:50');
+INSERT INTO USERS (customer_id, name, DOB, gender, phone, email, hashed_password, create_at) VALUES
+(users_seq.NEXTVAL, 'Anutin Charnvirakul', TO_DATE('1966-09-13', 'YYYY-MM-DD'), 'Male', '0878901234', 'anutin.charnvirakul@email.com', 'hashed_pass_7', TIMESTAMP '2024-07-22 13:10:15');
+INSERT INTO USERS (customer_id, name, DOB, gender, phone, email, hashed_password, create_at) VALUES
+(users_seq.NEXTVAL, 'Paetongtarn Shinawatra', TO_DATE('1986-10-05', 'YYYY-MM-DD'), 'Female', '0889012345', 'paetongtarn.shinawatra@email.com', 'hashed_pass_8', TIMESTAMP '2024-08-30 15:35:40');
+INSERT INTO USERS (customer_id, name, DOB, gender, phone, email, hashed_password, create_at) VALUES
+(users_seq.NEXTVAL, 'Chonnan Srikaew', TO_DATE('1975-03-18', 'YYYY-MM-DD'), 'Male', '0890123456', 'chonnan.srikaew@email.com', 'hashed_pass_9', TIMESTAMP '2024-09-10 17:50:05');
+INSERT INTO USERS (customer_id, name, DOB, gender, phone, email, hashed_password, create_at) VALUES
+(users_seq.NEXTVAL, 'Supachai Somcharoen', TO_DATE('1982-07-30', 'YYYY-MM-DD'), 'Male', '0901234567', 'supachai.somcharoen@email.com', 'hashed_pass_10', TIMESTAMP '2024-10-25 19:05:20');

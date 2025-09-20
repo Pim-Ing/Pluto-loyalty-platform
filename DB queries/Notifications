@@ -1,0 +1,35 @@
+-- Create CUSTOMER_NOTIFICATION Table--
+CREATE TABLE USER_NOTIFICATIONS (
+    notification_id NUMBER(10) CONSTRAINT customer_notif_notif_id_pk PRIMARY KEY,
+    customer_id NUMBER(10),
+    noti_title VARCHAR2(100) CONSTRAINT customer_notif_title_nn NOT NULL,
+    noti_description VARCHAR2(255) CONSTRAINT customer_notif_desc_nn NOT NULL,
+    is_read NUMBER(1) DEFAULT 0 CONSTRAINT customer_notif_is_read_nn NOT NULL
+        CONSTRAINT user_notif_is_read_ck CHECK (is_read IN (0, 1)),
+    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP CONSTRAINT customer_notif_create_at_nn NOT NULL,
+    CONSTRAINT user_notif_customer_id_fk FOREIGN KEY (customer_id) REFERENCES CUSTOMERS(customer_id)
+);
+
+-- Insert CUSTOMER_NOTIFICATIONS (10+ records)--
+INSERT INTO CUSTOMER_NOTIFICATIONS (notification_id, customer_id, noti_title, noti_description, is_read, create_at) VALUES
+(notifications_seq.NEXTVAL, 1, 'New Points Earned', 'You earned 50 points from KFC', 0, TIMESTAMP '2024-06-15 12:35:00');
+INSERT INTO CUSTOMER_NOTIFICATIONS (notification_id, customer_id, noti_title, noti_description, is_read, create_at) VALUES
+(notifications_seq.NEXTVAL, 1, 'Reward Redeemed', 'You used 99 points to get 20 THB discount', 1, TIMESTAMP '2024-07-20 18:20:00');
+INSERT INTO CUSTOMER_NOTIFICATIONS (notification_id, customer_id, noti_title, noti_description, is_read, create_at) VALUES
+(notifications_seq.NEXTVAL, 2, 'Points from Macdonald', 'You earned 30 points from Macdonald', 0, TIMESTAMP '2024-08-10 14:25:00');
+INSERT INTO CUSTOMER_NOTIFICATIONS (notification_id, customer_id, noti_title, noti_description, is_read, create_at) VALUES
+(notifications_seq.NEXTVAL, 2, 'New Coupon Available', 'You received a discount coupon from Bon Chon', 0, TIMESTAMP '2024-09-05 19:50:00');
+INSERT INTO CUSTOMER_NOTIFICATIONS (notification_id, customer_id, noti_title, noti_description, is_read, create_at) VALUES
+(notifications_seq.NEXTVAL, 3, 'Reward Successfully Claimed', 'You redeemed 399 points for Swensens reward', 1, TIMESTAMP '2024-10-12 11:35:00');
+INSERT INTO CUSTOMER_NOTIFICATIONS (notification_id, customer_id, noti_title, noti_description, is_read, create_at) VALUES
+(notifications_seq.NEXTVAL, 4, 'Points Expiring Soon', 'Your points will expire in 7 days', 0, TIMESTAMP '2024-11-18 13:50:00');
+INSERT INTO CUSTOMER_NOTIFICATIONS (notification_id, customer_id, noti_title, noti_description, is_read, create_at) VALUES
+(notifications_seq.NEXTVAL, 5, 'New Promotion Available', 'Special promotion from Potato Corner', 0, TIMESTAMP '2024-12-22 15:25:00');
+INSERT INTO CUSTOMER_NOTIFICATIONS (notification_id, customer_id, noti_title, noti_description, is_read, create_at) VALUES
+(notifications_seq.NEXTVAL, 6, '25 THB Discount Applied', 'You used 50 points for 25 THB discount', 1, TIMESTAMP '2025-01-05 17:40:00');
+INSERT INTO CUSTOMER_NOTIFICATIONS (notification_id, customer_id, noti_title, noti_description, is_read, create_at) VALUES
+(notifications_seq.NEXTVAL, 7, 'Free Ice Cream Claimed', 'You redeemed 40 points for free ice cream', 1, TIMESTAMP '2025-02-10 19:55:00');
+INSERT INTO CUSTOMER_NOTIFICATIONS (notification_id, customer_id, noti_title, noti_description, is_read, create_at) VALUES
+(notifications_seq.NEXTVAL, 8, 'Points Earned from Sizzler', 'You earned 35 points from Sizzler', 0, TIMESTAMP '2025-03-15 21:10:00');
+INSERT INTO CUSTOMER_NOTIFICATIONS (notification_id, customer_id, noti_title, noti_description, is_read, create_at) VALUES
+(notifications_seq.NEXTVAL, 9, 'Welcome to S&P Loyalty', 'Welcome to S&P Loyalty Program', 1, TIMESTAMP '2025-04-20 22:25:00');

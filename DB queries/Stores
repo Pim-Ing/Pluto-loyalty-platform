@@ -1,0 +1,32 @@
+-- Create STORES Table--
+CREATE TABLE STORES (
+    store_id NUMBER(10) CONSTRAINT stores_store_id_pk PRIMARY KEY,
+    partner_id NUMBER(10) CONSTRAINT stores_partner_id_nn NOT NULL,
+    store_name VARCHAR2(100) CONSTRAINT stores_store_name_nn NOT NULL,
+    category VARCHAR2(50) CONSTRAINT stores_category_nn NOT NULL
+        CONSTRAINT stores_category_ck CHECK (category IN ('Restaurant', 'Beverage', 'Dessert', 'Fashion', 'Entertainment')),
+    store_logo_url VARCHAR2(255),
+    CONSTRAINT stores_partner_id_fk FOREIGN KEY (partner_id) REFERENCES PARTNERSHIPS(partnership_id)
+);
+
+-- Insert STORES (from sampling data)--
+INSERT INTO STORES (store_id, partner_id, store_name, category, store_logo_url) VALUES
+(stores_seq.NEXTVAL, 1100, 'KFC', 'Restaurant', 'https://store.com/kfc.png');
+INSERT INTO STORES (store_id, partner_id, store_name, category, store_logo_url) VALUES
+(stores_seq.NEXTVAL, 1101, 'Macdonald', 'Restaurant', 'https://store.com/macdonald.png');
+INSERT INTO STORES (store_id, partner_id, store_name, category, store_logo_url) VALUES
+(stores_seq.NEXTVAL, 1102, 'Bon Chon', 'Restaurant', 'https://store.com/bonchon.png');
+INSERT INTO STORES (store_id, partner_id, store_name, category, store_logo_url) VALUES
+(stores_seq.NEXTVAL, 1102, 'Swensens', 'Dessert', 'https://store.com/swensens.png');
+INSERT INTO STORES (store_id, partner_id, store_name, category, store_logo_url) VALUES
+(stores_seq.NEXTVAL, 1103, 'Pizza Hut', 'Restaurant', 'https://store.com/pizzahut.png');
+INSERT INTO STORES (store_id, partner_id, store_name, category, store_logo_url) VALUES
+(stores_seq.NEXTVAL, 1104, 'Potato Corner', 'Beverage', 'https://store.com/potatocorner.png');
+INSERT INTO STORES (store_id, partner_id, store_name, category, store_logo_url) VALUES
+(stores_seq.NEXTVAL, 1102, 'Pizza Delivery', 'Restaurant', 'https://store.com/pizzadelivery.png');
+INSERT INTO STORES (store_id, partner_id, store_name, category, store_logo_url) VALUES
+(stores_seq.NEXTVAL, 1102, 'Daily Queen', 'Dessert', 'https://store.com/dailyqueen.png');
+INSERT INTO STORES (store_id, partner_id, store_name, category, store_logo_url) VALUES
+(stores_seq.NEXTVAL, 1102, 'Sizzler', 'Restaurant', 'https://store.com/sizzler.png');
+INSERT INTO STORES (store_id, partner_id, store_name, category, store_logo_url) VALUES
+(stores_seq.NEXTVAL, 1102, 'S&P', 'Restaurant', 'https://store.com/snp.png');

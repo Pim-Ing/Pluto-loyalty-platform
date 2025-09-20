@@ -1,0 +1,35 @@
+-- Create
+CREATE TABLE CUSTOMER_CONSENTS (
+    consent_id NUMBER(10) CONSTRAINT consents_cons_id_pk PRIMARY KEY,
+    customer_id NUMBER(10) CONSTRAINT consents_customer_id_nn NOT NULL,
+    consent_type VARCHAR2(15) CONSTRAINT consents_type_nn NOT NULL
+        CONSTRAINT consents_type_ck CHECK (consent_type IN ('Share_email', 'Share_phone', 'Share_DOB', 'Share_gender')),
+    consent_receive NUMBER(1) DEFAULT 0 CONSTRAINT consents_rec_nn NOT NULL
+        CONSTRAINT consents_rec_ck CHECK (consent_receive IN (0, 1)),
+    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP CONSTRAINT consents_update_nn NOT NULL,
+    CONSTRAINT consents_user_fk FOREIGN KEY (user_id) REFERENCES CUSTOMERS(customer_id)
+);
+
+-- Insert CUSTOMER_CONSENTS (10+ records)--
+INSERT INTO CUSTOMER_CONSENTS (consent_id, customer_id, consent_type, consent_receive, update_at) VALUES
+(consents_seq.NEXTVAL, 1, 'Share_email', 1, TIMESTAMP '2024-01-15 09:35:00');
+INSERT INTO CUSTOMER_CONSENTS (consent_id, customer_id, consent_type, consent_receive, update_at) VALUES
+(consents_seq.NEXTVAL, 1, 'Share_phone', 1, TIMESTAMP '2024-01-15 09:35:00');
+INSERT INTO CUSTOMER_CONSENTS (consent_id, customer_id, consent_type, consent_receive, update_at) VALUES
+(consents_seq.NEXTVAL, 1, 'Share_DOB', 1, TIMESTAMP '2024-01-15 09:35:00');
+INSERT INTO CUSTOMER_CONSENTS (consent_id, customer_id, consent_type, consent_receive, update_at) VALUES
+(consents_seq.NEXTVAL, 2, 'Share_email', 1, TIMESTAMP '2024-02-20 14:30:00');
+INSERT INTO CUSTOMER_CONSENTS (consent_id, customer_id, consent_type, consent_receive, update_at) VALUES
+(consents_seq.NEXTVAL, 2, 'Share_phone', 1, TIMESTAMP '2024-02-20 14:30:00');
+INSERT INTO CUSTOMER_CONSENTS (consent_id, customer_id, consent_type, consent_receive, update_at) VALUES
+(consents_seq.NEXTVAL, 2, 'Share_gender', 0, TIMESTAMP '2024-02-20 14:30:00');
+INSERT INTO CUSTOMER_CONSENTS (consent_id, customer_id, consent_type, consent_receive, update_at) VALUES
+(consents_seq.NEXTVAL, 3, 'Share_email', 1, TIMESTAMP '2024-03-10 10:20:00');
+INSERT INTO CUSTOMER_CONSENTS (consent_id, customer_id, consent_type, consent_receive, update_at) VALUES
+(consents_seq.NEXTVAL, 3, 'Share_DOB', 0, TIMESTAMP '2024-03-10 10:20:00');
+INSERT INTO CUSTOMER_CONSENTS (consent_id, customer_id, consent_type, consent_receive, update_at) VALUES
+(consents_seq.NEXTVAL, 4, 'Share_email', 1, TIMESTAMP '2024-04-05 16:45:00');
+INSERT INTO CUSTOMER_CONSENTS (consent_id, customer_id, consent_type, consent_receive, update_at) VALUES
+(consents_seq.NEXTVAL, 4, 'Share_phone', 1, TIMESTAMP '2024-04-05 16:45:00');
+INSERT INTO CUSTOMER_CONSENTS (consent_id, customer_id, consent_type, consent_receive, update_at) VALUES
+(consents_seq.NEXTVAL, 5, 'Share_email', 1, TIMESTAMP '2024-05-12 08:25:00');
