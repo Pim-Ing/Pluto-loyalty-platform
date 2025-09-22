@@ -47,3 +47,4 @@ SELECT 'REWARD' AS promotion_type, reward_id AS id, reward_title AS title, store
 FROM reward_analysis
 WHERE redemption_count > 0
 ORDER BY promotion_type, redemption_count DESC;
+
