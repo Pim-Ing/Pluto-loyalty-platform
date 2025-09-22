@@ -24,7 +24,7 @@ Document file full version : https://docs.google.com/document/d/19qJSxfLRqfi7ZT1
 
 The core of Pluto is a robust relational database designed in **Oracle SQL**. The schema supports complex relationships between customers, stores, points, rewards, and transactions.
 
-![ER Diagram](Database/er_diagram.png)
+!([Database/er_diagram.png](https://drive.google.com/file/d/1kl889SXdJn0cypn7GGwhOrKohoXct6K1/view))
 
 
 ## 📋 Project Context
