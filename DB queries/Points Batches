@@ -13,16 +13,24 @@ CREATE TABLE POINTS_BATCHES (
     CONSTRAINT points_trans_fk FOREIGN KEY (transaction_id) REFERENCES TRANSACTIONS(transaction_id)
 );
 
--- Insert POINTS_BATCHES only for earning transactions (positive point_delta)--
+-- Insert all POINTS_BATCHES records in order
 INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
-(points_batches_seq.NEXTVAL, 1000000000000000, 303, 50, 50, TIMESTAMP '2025-06-15 12:30:45', TIMESTAMP '2025-12-15 12:30:45');
+(points_batches_seq.NEXTVAL, 1000000000000000, 303, 110, 110, DATE '2025-06-15', DATE '2025-12-15');
 INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
-(points_batches_seq.NEXTVAL, 1000000000000001, 305, 30, 30, TIMESTAMP '2025-08-10 14:20:15', TIMESTAMP '2025-12-10 14:20:15');
+(points_batches_seq.NEXTVAL, 1000000000000001, 305, 30, 30, DATE '2025-08-10', DATE '2025-12-10');
 INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
-(points_batches_seq.NEXTVAL, 1000000000000004, 308, 25, 25, TIMESTAMP '2025-11-18 13:45:00', TIMESTAMP '2026-05-18 13:45:00');
+(points_batches_seq.NEXTVAL, 1000000000000004, 308, 25, 25, DATE '2025-11-18', DATE '2026-05-18');
 INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
-(points_batches_seq.NEXTVAL, 1000000000000005, 309, 15, 15, TIMESTAMP '2025-12-22 15:20:00', TIMESTAMP '2026-06-22 15:20:00');
+(points_batches_seq.NEXTVAL, 1000000000000005, 309, 15, 15, DATE '2025-12-22', DATE '2026-06-22');
 INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
-(points_batches_seq.NEXTVAL, 1000000000000008, 312, 35, 35, TIMESTAMP '2025-03-15 21:05:00', TIMESTAMP '2025-09-15 21:05:00');
+(points_batches_seq.NEXTVAL, 1000000000000008, 312, 35, 35, DATE '2025-03-15', DATE '2025-09-15');
 INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
-(points_batches_seq.NEXTVAL, 1000000000000009, 313, 20, 20, TIMESTAMP '2025-04-20 22:20:00', TIMESTAMP '2025-10-20 22:20:00');
+(points_batches_seq.NEXTVAL, 1000000000000009, 313, 20, 20, DATE '2025-04-20', DATE '2025-10-20');
+INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
+(points_batches_seq.NEXTVAL, 1000000000000002, 314, 20, 20, DATE '2025-06-01', DATE '2026-06-01');
+INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
+(points_batches_seq.NEXTVAL, 1000000000000003, 315, 500, 500, DATE '2025-07-05', DATE '2026-07-05');
+INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
+(points_batches_seq.NEXTVAL, 1000000000000006, 316, 80, 80, DATE '2025-01-01', DATE '2026-01-01');
+INSERT INTO POINTS_BATCHES (batch_id, membership_id, transaction_id, points_earned, points_remaining, earned_date, expiration_date) VALUES
+(points_batches_seq.NEXTVAL, 1000000000000007, 317, 50, 50, DATE '2025-01-10', DATE '2026-01-10');

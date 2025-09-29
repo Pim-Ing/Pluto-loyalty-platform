@@ -39,3 +39,11 @@ INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, co
 (transactions_seq.NEXTVAL, 2108, 1000000000000008, NULL, NULL, 35, 'Earn', TIMESTAMP '2025-03-15 21:05:00');
 INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, batch_id, point_delta, type, timestamp) VALUES
 (transactions_seq.NEXTVAL, 2109, 1000000000000009, NULL, NULL, 20, 'Earn', TIMESTAMP '2025-04-20 22:20:00');
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2103, 1000000000000002, NULL, NULL, 20, 'Earn', TIMESTAMP '2025-06-01 22:20:00');
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2104, 1000000000000003, NULL, NULL, 500, 'Earn', TIMESTAMP '2025-07-05 15:20:00');
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2105, 1000000000000006, NULL, NULL, 80, 'Earn', TIMESTAMP '2025-01-01 17:35:00');
+INSERT INTO TRANSACTIONS (transaction_id, store_id, membership_id, reward_id, coupon_id, point_delta, type, timestamp) VALUES
+(transactions_seq.NEXTVAL, 2106, 1000000000000007, NULL, NULL, 50, 'Earn', TIMESTAMP '2025-01-10 19:45:00');
